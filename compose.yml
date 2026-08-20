@@ -1,0 +1,7 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: spotly
+      POSTGRES_PASSWORD: spotly_password
+      POSTGRES_DB: spotly
