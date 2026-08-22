@@ -1,6 +1,8 @@
 services:
   postgres:
     image: postgres:17
+    ports:
+      - "5435:5432"
     environment:
       POSTGRES_USER: spotly
       POSTGRES_PASSWORD: spotly_password

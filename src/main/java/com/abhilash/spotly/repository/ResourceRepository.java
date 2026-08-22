@@ -1,10 +1,9 @@
 package com.abhilash.spotly.repository;
 
+import com.abhilash.spotly.entity.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.abhilash.spotly.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    
+public interface ResourceRepository extends JpaRepository<Resource, Long> { 
 }
