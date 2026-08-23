@@ -1,6 +1,7 @@
 package com.abhilash.spotly.controller;
 
 import com.abhilash.spotly.service.UserService;
+import com.abhilash.spotly.dto.CreateUserRequest;
 import com.abhilash.spotly.entity.User;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,5 +18,10 @@ public class UserController {
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @PostMapping
+    public User createUser(@RequestBody CreateUserRequest createUserRequest) {
+        return userService.createUser(createUserRequest);
     }
 }

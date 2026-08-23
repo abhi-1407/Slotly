@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.abhilash.spotly.dto.CreateResourceRequest;
 import com.abhilash.spotly.entity.Resource;
 import com.abhilash.spotly.service.ResourceService;
 
@@ -25,7 +27,7 @@ public class ResourceController {
        }
 
        @PostMapping
-       public Resource createResource(@RequestBody Resource resource) {
-        return resourceService.createResource(resource);
+       public Resource createResource(@RequestBody CreateResourceRequest createResourceRequest) {
+        return resourceService.createResource(createResourceRequest);
        }      
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.abhilash.spotly.dto.CreateResourceRequest;
 import com.abhilash.spotly.entity.Resource;
 import com.abhilash.spotly.repository.ResourceRepository;
 
@@ -23,7 +24,10 @@ public class ResourceService {
         return resourceRepository.findById(id).orElse(null);
        }
 
-       public Resource createResource(Resource resource) {
+       public Resource createResource(CreateResourceRequest createResourceRequest) {
+        Resource resource = new Resource();
+        resource.setName(createResourceRequest.getName());
+        resource.setDescription(createResourceRequest.getDescription());
         return resourceRepository.save(resource);
        }
 }

@@ -1,5 +1,6 @@
 package com.abhilash.spotly.service;
 
+import com.abhilash.spotly.dto.CreateUserRequest;
 import com.abhilash.spotly.entity.User;
 import com.abhilash.spotly.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User createUser(User user) {
+    public User createUser(CreateUserRequest createUserRequest) {
+        User user = new User();
+        user.setName(createUserRequest.getName());
+        user.setEmail(createUserRequest.getEmail());
         return userRepository.save(user);
     }
 
