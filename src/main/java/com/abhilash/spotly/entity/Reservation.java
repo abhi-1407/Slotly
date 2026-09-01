@@ -5,13 +5,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 import java.util.UUID;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Reservation {
 
