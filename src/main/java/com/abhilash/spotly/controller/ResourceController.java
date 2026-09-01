@@ -29,5 +29,5 @@ public class ResourceController {
        @PostMapping
        public Resource createResource(@RequestBody CreateResourceRequest createResourceRequest) {
         return resourceService.createResource(createResourceRequest);
-       }      
+       }
 }

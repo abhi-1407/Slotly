@@ -1,26 +1,23 @@
 package com.abhilash.spotly.entity;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.util.UUID;
-@Entity
-@Table(name = "users")
-@Getter
-@Setter
-@NoArgsConstructor
-public class User {
 
+@Entity
+@Getter
+@Table(name = "slots")
+public class Slot {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    private String name;
-
-    private String email;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private boolean isBooked;
 }

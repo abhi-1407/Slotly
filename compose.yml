@@ -7,3 +7,13 @@ services:
       POSTGRES_USER: spotly
       POSTGRES_PASSWORD: spotly_password
       POSTGRES_DB: spotly
+    volumes:
+      - spotly_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U spotly -d spotly"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  spotly_pgdata:

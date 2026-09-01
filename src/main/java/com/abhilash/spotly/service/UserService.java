@@ -6,6 +6,7 @@ import com.abhilash.spotly.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -15,8 +16,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public User getUserById(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public User createUser(CreateUserRequest createUserRequest) {
