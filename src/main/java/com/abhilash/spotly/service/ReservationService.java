@@ -10,6 +10,7 @@ import com.abhilash.spotly.repository.UserRepository;
 import java.util.UUID;
 
 import com.abhilash.spotly.dto.CreateReservationRequest;
+import com.abhilash.spotly.exception.SlotAlreadyBookedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,7 @@ public class ReservationService {
         User user = userRepository.findById(createReservationRequest.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         Slot slot = slotRepository.findById(createReservationRequest.getSlotId()).orElseThrow(() -> new RuntimeException("Slot not found"));
         if(reservationRepository.existsBySlotId(createReservationRequest.getSlotId())) {
-            throw new RuntimeException("Slot is already booked");
+            throw new SlotAlreadyBookedException();
         }
         Reservation reservation = new Reservation(user, slot);
         return reservationRepository.save(reservation);
