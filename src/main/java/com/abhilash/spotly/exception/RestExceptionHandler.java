@@ -14,7 +14,16 @@ public class RestExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public Map<String, Object> handleSlotAlreadyBooked(SlotAlreadyBookedException ex) {
         return Map.of(
-                "status", 409,
+                "status", HttpStatus.CONFLICT.value(),
+                "error", "Conflict",
+                "message", ex.getMessage());
+    }
+
+    @ExceptionHandler(ReservationConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public Map<String, Object> handleReservationConflict(ReservationConflictException ex) {
+        return Map.of(
+                "status", HttpStatus.CONFLICT.value(),
                 "error", "Conflict",
                 "message", ex.getMessage());
     }

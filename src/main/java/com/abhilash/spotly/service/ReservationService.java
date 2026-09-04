@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import com.abhilash.spotly.dto.CreateReservationRequest;
 import com.abhilash.spotly.exception.SlotAlreadyBookedException;
+import com.abhilash.spotly.exception.ReservationConflictException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +39,6 @@ public class ReservationService {
     }
 
     public Reservation getReservationById(UUID id) {
-        return reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
+        return reservationRepository.findById(id).orElseThrow(() -> new ReservationConflictException());
     }
 }
