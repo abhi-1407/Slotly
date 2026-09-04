@@ -13,6 +13,8 @@ import com.abhilash.spotly.entity.Reservation;
 import com.abhilash.spotly.dto.CreateReservationRequest;
 import com.abhilash.spotly.service.ReservationService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
@@ -23,12 +25,12 @@ public class ReservationController {
     }
 
     @PostMapping
-    public Reservation createReservation(@RequestBody CreateReservationRequest createReservationRequest) {
+    public Reservation createReservation(@RequestBody @Valid CreateReservationRequest createReservationRequest) {
         return reservationService.createReservation(createReservationRequest);
     }
 
     @GetMapping("/{id}")
-    public Reservation getReservationById(@PathVariable String id) {
-        return reservationService.getReservationById(UUID.fromString(id));
+    public Reservation getReservationById(@PathVariable UUID id) {
+        return reservationService.getReservationById(id);
     }
-}
+}   

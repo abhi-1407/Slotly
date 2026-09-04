@@ -10,18 +10,23 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class RestExceptionHandler {
 
-    @ExceptionHandler(SlotAlreadyBookedException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public Map<String, Object> handleSlotAlreadyBooked(SlotAlreadyBookedException ex) {
+    @ExceptionHandler({
+            ResourceNotFoundException.class,
+            UserNotFoundException.class,
+            SlotNotFoundException.class,
+            ReservationNotFoundException.class
+    })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, Object> handleNotFoundException(RuntimeException ex) {
         return Map.of(
-                "status", HttpStatus.CONFLICT.value(),
-                "error", "Conflict",
+                "status", HttpStatus.NOT_FOUND.value(),
+                "error", "Not Found",
                 "message", ex.getMessage());
     }
 
-    @ExceptionHandler(ReservationConflictException.class)
+    @ExceptionHandler(SlotAlreadyBookedException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public Map<String, Object> handleReservationConflict(ReservationConflictException ex) {
+    public Map<String, Object> handleSlotAlreadyBooked(SlotAlreadyBookedException ex) {
         return Map.of(
                 "status", HttpStatus.CONFLICT.value(),
                 "error", "Conflict",

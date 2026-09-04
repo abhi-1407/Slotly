@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.abhilash.spotly.dto.CreateSlotRequest;
 import com.abhilash.spotly.entity.Resource;
 import com.abhilash.spotly.entity.Slot;
+import com.abhilash.spotly.exception.ResourceNotFoundException;
 import com.abhilash.spotly.repository.ResourceRepository;
 import com.abhilash.spotly.repository.SlotRepository;
 
@@ -20,7 +21,7 @@ public class SlotService {
 
     public Slot createSlot(CreateSlotRequest request) {
         Resource resource = resourceRepository.findById(request.getResourceId())
-                .orElseThrow(() -> new RuntimeException("Resource not found"));
+                .orElseThrow(() -> new ResourceNotFoundException());
         Slot slot = new Slot();
         slot.setResource(resource);
         slot.setStartTime(request.getStartTime());

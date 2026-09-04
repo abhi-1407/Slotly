@@ -2,6 +2,7 @@ package com.abhilash.spotly.service;
 
 import com.abhilash.spotly.dto.CreateUserRequest;
 import com.abhilash.spotly.entity.User;
+import com.abhilash.spotly.exception.UserNotFoundException;
 import com.abhilash.spotly.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class UserService {
     }
 
     public User getUserById(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
     }
 
     public User createUser(CreateUserRequest createUserRequest) {

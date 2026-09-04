@@ -11,7 +11,10 @@ import java.util.UUID;
 
 import com.abhilash.spotly.dto.CreateReservationRequest;
 import com.abhilash.spotly.exception.SlotAlreadyBookedException;
-import com.abhilash.spotly.exception.ReservationConflictException;
+import com.abhilash.spotly.exception.SlotNotFoundException;
+import com.abhilash.spotly.exception.UserNotFoundException;
+import com.abhilash.spotly.exception.ReservationNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +32,8 @@ public class ReservationService {
 
     @Transactional
     public Reservation createReservation(CreateReservationRequest createReservationRequest) {
-        User user = userRepository.findById(createReservationRequest.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
-        Slot slot = slotRepository.findById(createReservationRequest.getSlotId()).orElseThrow(() -> new RuntimeException("Slot not found"));
+        User user = userRepository.findById(createReservationRequest.getUserId()).orElseThrow(() -> new UserNotFoundException());
+        Slot slot = slotRepository.findById(createReservationRequest.getSlotId()).orElseThrow(() -> new SlotNotFoundException());
         if(reservationRepository.existsBySlotId(createReservationRequest.getSlotId())) {
             throw new SlotAlreadyBookedException();
         }
@@ -39,6 +42,6 @@ public class ReservationService {
     }
 
     public Reservation getReservationById(UUID id) {
-        return reservationRepository.findById(id).orElseThrow(() -> new ReservationConflictException());
+        return reservationRepository.findById(id).orElseThrow(() -> new ReservationNotFoundException());
     }
 }
